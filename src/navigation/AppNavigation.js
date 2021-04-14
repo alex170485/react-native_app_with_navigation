@@ -2,7 +2,7 @@ import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {MainScreen} from "../Screen/MainScreen";
 import {PostScreen} from "../Screen/PostScreen";
-import {THEME} from "../../theme";
+import {THEME} from "../theme";
 import {Platform} from 'react-native'
 
 
