@@ -1,12 +1,20 @@
 import React from "react";
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text, StyleSheet, Button} from 'react-native'
 
-export const MainScreen = ({}) => {
-    return <View style = {styles.center}>
+export const MainScreen = ({navigation}) => {
+    const goToPost = () => {
+       navigation.navigate('Post')
+    }
+    return <View style={styles.center}>
         <Text>
             MainScreen
         </Text>
+        <Button title='go to post' onPress={goToPost}></Button>
     </View>
+}
+MainScreen.navigationOptions = {
+    headerTitle: 'Мой блог'
+
 }
 
 const styles = ({

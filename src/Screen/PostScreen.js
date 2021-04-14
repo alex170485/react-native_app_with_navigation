@@ -8,6 +8,9 @@ export const PostScreen = ({}) => {
         </Text>
     </View>
 }
+PostScreen.navigationOptions = {
+    headerTitle: 'Пост номер 42'
+}
 
 const styles = ({
     center: {
