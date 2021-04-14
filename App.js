@@ -3,23 +3,19 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {AppLoading} from "expo/build/removed.web";
 import {bootstrap} from "./src/bootstrap";
+import {AppNavigation} from "./src/navigation/AppNavigation";
 
 export default function App() {
   const [isReady, setIsReady] =useState(false)
 
-  if(!isReady) {
+  if(isReady) {
     return <AppLoading
         startAsync = {bootstrap}
         onFinish = {() => setIsReady(true)}
         onError = {err=> console.log(err)}
     />
   }
-  return (
-    <View>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <AppNavigation/>
 }
 
 
