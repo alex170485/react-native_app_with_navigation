@@ -24,11 +24,11 @@ const navigatorOptions = {
 
 
 const PostNavigator = createStackNavigator({
-    Main: MainScreen,
-    Post: {
-        screen: PostScreen
-    }
-}, navigatorOptions
+        Main: MainScreen,
+        Post: {
+            screen: PostScreen
+        }
+    }, navigatorOptions
 )
 const BookedNavigator = createStackNavigator({
         Booked: BookedScreen,
@@ -40,16 +40,16 @@ const BookedNavigator = createStackNavigator({
 const bottomTabsConfig = {
     Post: {
         screen: PostNavigator,
-            navigationOptions: {
+        navigationOptions: {
             tabBarLabel: 'Все',
-                tabBarIcon: info => (<Ionicons name={'ios-albums'} size={25} color={info.tintColor}/>)
+            tabBarIcon: info => (<Ionicons name={'ios-albums'} size={25} color={info.tintColor}/>)
         }
     },
     Booked: {
         screen: BookedNavigator,
-            navigationOptions: {
+        navigationOptions: {
             tabBarLabel: 'Избранное',
-                tabBarIcon: info => (<Ionicons name={'ios-star'} size={25} color={info.tintColor}/>)
+            tabBarIcon: info => (<Ionicons name={'ios-star'} size={25} color={info.tintColor}/>)
         }
     }
 }
@@ -63,20 +63,44 @@ const BottomNavigator = Platform.OS === 'android'
         }
     })
     : createBottomTabNavigator(bottomTabsConfig, {
-        tabBarOptions: {
-            activeTintColor: THEME.MAIN_COLOR
+            tabBarOptions: {
+                activeTintColor: THEME.MAIN_COLOR
+            }
         }
-    }
-)
+    )
+
+const AboutNavigator = createStackNavigator({
+    About: AboutScreen
+}, navigatorOptions)
+const CreateNavigator = createStackNavigator({
+    Create: CreateScreen
+}, navigatorOptions)
 const MainNavigator = createDrawerNavigator({
     PostTabs: {
-        screen: BottomNavigator
-    },
-    About: {
-        screen: AboutScreen
+        screen: BottomNavigator,
+        navigationOptions: {
+            drawerLabel: 'Главная',
+            drawerIcon: <Ionicons name = 'ios-star'/>
+        }
     },
     Create: {
-        screen: CreateScreen
+        screen: CreateNavigator,
+        navigationOptions: {
+            drawerLabel: 'Создать пост'
+        }
+    },
+    About: {
+        screen: AboutNavigator,
+        navigationOptions: {
+            drawerLabel: 'О приложении'
+        }
+    },
+}, {
+    contentOptions: {
+        activeTintColor: THEME.MAIN_COLOR,
+        labelStyle: {
+            // fontFamily: 'open-regular'
+        }
     }
 })
 
