@@ -11,12 +11,13 @@ export const MainScreen = ({navigation}) => {
     }
     return <PostList data={DATA} onOpen={openPostHandler}/>
 }
-MainScreen.navigationOptions = {
+MainScreen.navigationOptions = ({navigation}) => ({
     headerTitle: 'Мой блог',
     headerRight: <HeaderButtons HeaderButtonComponent = {AppHeaderIcon}>
         <Item title = 'Take photo' iconName = 'ios-camera' onPress = {() => console.log('press')}/>
     </HeaderButtons>,
     headerLeft: <HeaderButtons HeaderButtonComponent = {AppHeaderIcon}>
-        <Item title = 'Menu Drawer' iconName = 'ios-menu' onPress = {() => console.log('press')}/>
+        <Item title = 'Menu Drawer' iconName = 'ios-menu' onPress = {() => navigation.toggleDrawer()}/>
     </HeaderButtons>
-}
+
+})

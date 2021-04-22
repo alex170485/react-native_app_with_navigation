@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createBottomTabNavigator} from 'react-navigation-tabs'
 import {createMaterialBottomTabNavigator} from 'react-navigation-material-bottom-tabs'
+import {createDrawerNavigator} from 'react-navigation-drawer'
 import {MainScreen} from "../Screen/MainScreen";
 import {PostScreen} from "../Screen/PostScreen";
 import {THEME} from "../theme";
@@ -9,6 +10,8 @@ import {Platform} from 'react-native'
 import {BookedScreen} from "../Screen/BookedScreen";
 import {Ionicons} from '@expo/vector-icons'
 import React from "react";
+import {AboutScreen} from "../Screen/AboutScreen";
+import {CreateScreen} from "../Screen/CreateScreen";
 
 const navigatorOptions = {
     defaultNavigationOptions: {
@@ -25,17 +28,14 @@ const PostNavigator = createStackNavigator({
     Post: {
         screen: PostScreen
     }
-}, {
-    initialRouteName: 'Main',
-    navigatorOptions
-})
+}, navigatorOptions
+)
 const BookedNavigator = createStackNavigator({
         Booked: BookedScreen,
         Post: {
             screen: PostScreen
         },
     }, navigatorOptions
-
 )
 const bottomTabsConfig = {
     Post: {
@@ -68,8 +68,18 @@ const BottomNavigator = Platform.OS === 'android'
         }
     }
 )
+const MainNavigator = createDrawerNavigator({
+    PostTabs: {
+        screen: BottomNavigator
+    },
+    About: {
+        screen: AboutScreen
+    },
+    Create: {
+        screen: CreateScreen
+    }
+})
 
-
-export const AppNavigation = createAppContainer(BottomNavigator)
+export const AppNavigation = createAppContainer(MainNavigator)
 
 
