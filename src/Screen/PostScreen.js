@@ -1,15 +1,14 @@
 import React, {useCallback, useEffect} from "react";
 import {View, Text, StyleSheet, Image, Button, ScrollView, Alert} from 'react-native'
-import {DATA} from "../data";
 import {THEME} from "../theme";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import {useDispatch, useSelector} from 'react-redux'
-import {toggleBooked} from "../store/action/postActions";
+import {removePost, toggleBooked} from "../store/action/postActions";
 
 export const PostScreen = ({navigation}) => {
     const postId = navigation.getParam('postId')
-    const post = DATA.find(p => p.id === postId)
+    const post = useSelector(state => state.post.allPosts.find(p=> p.id === postId))
     const dispatch = useDispatch()
     const booked = useSelector(state =>
         state.post.bookedPost.some(post => post.id === postId))
@@ -36,16 +35,22 @@ export const PostScreen = ({navigation}) => {
                 },
                 {
                     text: "Удаление", style: 'destructive', onPress: () => {
+                        navigation.navigate('Main')
+                        dispatch(removePost(postId))
                     }
+
                 }
             ]
         );
+    }
+    if (!post) {
+        return null
     }
 
     return <ScrollView>
         <Image source={{uri: post.img}} style={styles.image}/>
         <View style={styles.textWrap}>
-            <Text style={styles.title}>{post.text.repeat(100)}</Text>
+            <Text style={styles.title}>{post.text}</Text>
         </View>
         <Button title='удалить'
                 color={THEME.DANGER_COLOR}
